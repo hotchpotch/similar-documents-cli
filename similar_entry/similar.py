@@ -5,11 +5,11 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 from typing import Callable, Optional, List, Tuple
 
-def tfidf_vectors(texts: List[str], tokenizer: Optional[Callable[[str], str]]) -> csr_matrix:
+def tfidf_vectorize(texts: List[str], tokenizer: Optional[Callable[[str], str]] = None) -> csr_matrix:
     vectorizer = TfidfVectorizer(preprocessor=tokenizer)
     return vectorizer.fit_transform(texts)
 
-def similar_top_k(target: csr_matrix, vectors: csr_matrix, k=3) -> List[Tuple[int, float]]:
+def top_k(target: csr_matrix, vectors: csr_matrix, k=3) -> List[Tuple[int, float]]:
     scores = cosine_similarity(target, vectors)[0]
     sort_indexes = scores.argsort()[::-1]
     top_indexes = sort_indexes[:1+k]
