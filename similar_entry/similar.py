@@ -30,4 +30,4 @@ def top_k(target: csr_matrix, vectors: csr_matrix, k=3) -> List[Tuple[int, float
     elif top_scores.shape[0] > k:
         top_scores = np.delete(top_scores, k)
         top_indexes = np.delete(top_indexes, k)
-    return zip(top_indexes, top_scores)
+    return list(zip(top_indexes, top_scores))

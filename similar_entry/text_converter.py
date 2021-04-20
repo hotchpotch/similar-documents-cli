@@ -1,5 +1,8 @@
+from typing import NewType, Callable
 from markdown import Markdown
 from bs4 import BeautifulSoup
+
+Converter = Callable[[str], str]
 
 
 def _createMarkdownToText():
@@ -18,7 +21,9 @@ markdown = _createMarkdownToText()
 
 
 def html(source: str) -> str:
-    return "".join(BeautifulSoup(source).findAll(text=True)).strip()
+    return "".join(
+        BeautifulSoup(source, features="html.parser").findAll(text=True)
+    ).strip()
 
 
 def text(source: str) -> str:
