@@ -1,5 +1,13 @@
+from . import text_converter, tokenizer
 
-import similar_entry.similar
-import similar_entry.text_converter
-import similar_entry.tokenizer
-import similar_entry.cli
+from .cmd_utils import files_to_texts, similar_vectors_top_k, assign_top_k
+from .similar import tfidf_vectorize
+
+__all__ = [
+    "files_to_texts",
+    "similar_vectors_top_k",
+    "assign_top_k",
+    "tfidf_vectorize",
+    "text_converter",
+    "tokenizer",
+]

@@ -1,14 +1,34 @@
 from pathlib import Path
-from similar_entry.cli import similar_entry
+from similar_entry import (
+    files_to_texts,
+    similar_vectors_top_k,
+    text_converter,
+    tfidf_vectorize,
+    assign_top_k,
+    tokenizer,
+)
+
 import os
+import sys
+import json
 
 files = list(
     (
         Path(os.getenv("HOME"))
-        .joinpath("Dropbox/secon-sites/data/markdowns/recently/")
-        .glob("**/*.md")
+        .joinpath("Dropbox/secon-sites/data/markdowns/")
+        .glob("**/**/*.md")
     )
 )
+files = [str(f) for f in files]
+
 if __name__ == "__main__":
-    top_ks = similar_entry(files)
-    print(repr(len(top_ks)))
+    # from glob import glob
+
+    print("text")
+    texts = files_to_texts(files)
+    print("vectors")
+    vectors = tfidf_vectorize(texts, tokenizer=tokenizer.mecab)
+    print("top_k")
+    top_ks = similar_vectors_top_k(vectors, k=3)
+    assigned = assign_top_k(files, top_ks)
+    print(json.dumps(assigned))

@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from typing import Optional
 from pathlib import Path
+
+from scipy.sparse.csr import csr_matrix
 from . import similar, text_converter
 import multiprocessing as mp
 import itertools
@@ -46,12 +48,19 @@ def files_to_texts(
     return texts
 
 
-def _top_k_tuple(t):
-    return similar.top_k(t[0], t[1])
+def _top_k_tuple(t: tuple(csr_matrix, csr_matrix, int)):
+    return similar.top_k(*t)
 
 
-def similar_entry(files: list[str], top_k=3):
-    texts = files_to_texts(files)
-    vectors = similar.tfidf_vectorize(texts)
+def similar_vectors_top_k(vectors: list[csr_matrix], k=3):
     pool = mp.Pool(mp.cpu_count())
-    return pool.map(_top_k_tuple, zip(vectors, itertools.cycle(vectors)))
+    return pool.map(
+        _top_k_tuple, zip(vectors, itertools.cycle([vectors]), itertools.cycle([k]))
+    )
+
+
+def assign_top_k(files: list[str], top_ks: list[list[tuple[int, float]]]):
+    file_dict: dict[str, tuple[str, float]] = {}
+    for (file, top_k) in zip(files, top_ks):
+        file_dict[file] = [(files[index], score) for (index, score) in top_k]
+    return file_dict
