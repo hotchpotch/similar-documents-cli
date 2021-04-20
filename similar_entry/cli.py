@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Optional
 from pathlib import Path
-from similar_entry import similar, text_converter
+from . import similar, text_converter
 import multiprocessing as mp
 import itertools
 
@@ -50,27 +50,8 @@ def _top_k_tuple(t):
     return similar.top_k(t[0], t[1])
 
 
-if __name__ == "__main__":
-    import os
-
-    files = list(
-        (
-            Path(os.getenv("HOME"))
-            .joinpath("Dropbox/secon-sites/data/markdowns/")
-            .glob("**/*.md")
-        )
-    )
-    print("read")
+def similar_entry(files: list[str], top_k=3):
     texts = files_to_texts(files)
-    print("vector")
     vectors = similar.tfidf_vectorize(texts)
-    print("cos")
-    results = {}
     pool = mp.Pool(mp.cpu_count())
-    top_ks = pool.map(_top_k_tuple, zip(vectors, itertools.cycle(vectors)))
-    # for (i, vect) in enumerate(vectors):
-    #     # これも並列化できる
-    #     k = similar.top_k(vect, vectors)
-    #     k_files = [(str(files[index]), score) for (index, score) in k]
-    #     results[str(files[i])] = k_files
-    print(repr(len(top_ks)))
+    return pool.map(_top_k_tuple, zip(vectors, itertools.cycle(vectors)))
