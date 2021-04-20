@@ -1,0 +1,8 @@
+{
+  "python.testing.pytestArgs": [
+    "similar_entry"
+  ],
+  "python.testing.unittestEnabled": false,
+  "python.testing.nosetestsEnabled": false,
+  "python.testing.pytestEnabled": true
+}
