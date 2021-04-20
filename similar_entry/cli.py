@@ -1,4 +1,6 @@
-from typing import Dict, List, Optional, Callable, Tuple
+from __future__ import annotations
+
+from typing import Optional
 from pathlib import Path
 from similar_entry import similar, text_converter
 import multiprocessing as mp
@@ -35,10 +37,10 @@ def _file_to_text_tuple(t):
 
 
 def files_to_texts(
-    files: List[str], converter: Optional[text_converter.Converter] = None
-) -> List[str]:
+    files: list[str], converter: Optional[text_converter.Converter] = None
+) -> list[str]:
     pool = mp.Pool(mp.cpu_count())
-    texts: List[str] = pool.map(
+    texts: list[str] = pool.map(
         _file_to_text_tuple, zip(files, itertools.cycle([converter]))
     )
     return texts

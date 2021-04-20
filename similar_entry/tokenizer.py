@@ -1,4 +1,4 @@
-from typing import List
+from __future__ import annotations
 
 
 def _createMecabTokenizer(target_fetures=["名詞", "形容詞", "感動詞"]):
@@ -6,7 +6,7 @@ def _createMecabTokenizer(target_fetures=["名詞", "形容詞", "感動詞"]):
 
     tagger = Tagger("-Owakati")
 
-    def tokenizer(text: str) -> List[str]:
+    def tokenizer(text: str) -> list[str]:
         tokens = []
         for word in tagger(text):
             if word.feature[0] in target_fetures:

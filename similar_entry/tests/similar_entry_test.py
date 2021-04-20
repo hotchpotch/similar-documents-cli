@@ -1,5 +1,5 @@
-from similar_entry.similar import tfidf_vectorize, top_k
-from similar_entry.tokenizer import mecab
+from ..similar import tfidf_vectorize, top_k
+from ..tokenizer import mecab
 
 
 def test_similar():

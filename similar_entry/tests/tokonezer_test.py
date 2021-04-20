@@ -1,4 +1,4 @@
-from similar_entry.tokenizer import mecab
+from ..tokenizer import mecab
 
 
 def test_mecab():

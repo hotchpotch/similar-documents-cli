@@ -1,4 +1,6 @@
-from typing import NewType, Callable
+from __future__ import annotations
+from typing import Callable
+
 from markdown import Markdown
 from bs4 import BeautifulSoup
 

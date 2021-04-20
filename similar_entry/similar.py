@@ -1,13 +1,14 @@
+from __future__ import annotations
+from typing import Callable, Optional
+
 import numpy as np
 from scipy.sparse.csr import csr_matrix
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-from typing import Callable, Optional, List, Tuple
-
 
 def tfidf_vectorize(
-    texts: List[str], tokenizer: Optional[Callable[[str], List[str]]] = None
+    texts: list[str], tokenizer: Optional[Callable[[str], list[str]]] = None
 ) -> csr_matrix:
     vectorizer_kargs = {
         "tokenizer": tokenizer,
@@ -18,7 +19,7 @@ def tfidf_vectorize(
     return vectorizer.fit_transform(texts)
 
 
-def top_k(target: csr_matrix, vectors: csr_matrix, k=5) -> List[Tuple[int, float]]:
+def top_k(target: csr_matrix, vectors: csr_matrix, k=5) -> list[tuple[int, float]]:
     scores = cosine_similarity(target, vectors)[0]
     sort_indexes = scores.argsort()[::-1]
     top_indexes = sort_indexes[: 1 + k]
