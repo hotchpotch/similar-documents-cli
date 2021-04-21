@@ -1,0 +1,6 @@
+Markdown
+numpy
+fugashi
+scipy
+beautifulsoup4
+scikit_learn
