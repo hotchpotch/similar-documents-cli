@@ -16,7 +16,25 @@ files = list(
     (
         Path(os.getenv("HOME"))
         .joinpath("Dropbox/secon-sites/data/markdowns/")
-        .glob("**/**/*.md")
+        .glob("201*/**/*.md")
+    )
+)
+files.extend(
+    list(
+        (
+            Path(os.getenv("HOME"))
+            .joinpath("Dropbox/secon-sites/data/markdowns/")
+            .glob("202*/**/*.md")
+        )
+    )
+)
+files.extend(
+    list(
+        (
+            Path(os.getenv("HOME"))
+            .joinpath("Dropbox/secon-sites/data/markdowns/")
+            .glob("recently/**/*.md")
+        )
     )
 )
 files = [str(f) for f in files]
@@ -24,11 +42,11 @@ files = [str(f) for f in files]
 if __name__ == "__main__":
     # from glob import glob
 
-    print("text")
+    # print("text")
     texts = files_to_texts(files)
-    print("vectors")
+    # print("vectors")
     vectors = tfidf_vectorize(texts, tokenizer=tokenizer.mecab)
-    print("top_k")
+    # print("top_k")
     top_ks = similar_vectors_top_k(vectors, k=3)
     assigned = assign_top_k(files, top_ks)
     print(json.dumps(assigned))
