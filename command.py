@@ -16,7 +16,7 @@ files = list(
     (
         Path(os.getenv("HOME"))
         .joinpath("Dropbox/secon-sites/data/markdowns/")
-        .glob("201*/**/*.md")
+        .glob("201*/*/*.md")
     )
 )
 files.extend(
@@ -24,7 +24,7 @@ files.extend(
         (
             Path(os.getenv("HOME"))
             .joinpath("Dropbox/secon-sites/data/markdowns/")
-            .glob("202*/**/*.md")
+            .glob("202*/*/*.md")
         )
     )
 )
@@ -33,7 +33,7 @@ files.extend(
         (
             Path(os.getenv("HOME"))
             .joinpath("Dropbox/secon-sites/data/markdowns/")
-            .glob("recently/**/*.md")
+            .glob("recently/*.md")
         )
     )
 )
