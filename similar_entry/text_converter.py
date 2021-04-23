@@ -8,12 +8,18 @@ Converter = Callable[[str], str]
 
 
 def _createMarkdownToText():
-    md = Markdown()
+    md = Markdown(extensions=["full_yaml_metadata"])
 
     def md2text(source: str) -> str:
         body = md.convert(source)
-        text = html(body)
-        # meta = md.Meta
+        meta = md.Meta
+        text = html(str(body))
+        if type(meta) is dict:
+            for key in meta.keys():
+                if key.upper() == "TITLE":
+                    text = meta[key] + "\n" + text
+                    break
+
         return text
 
     return md2text
