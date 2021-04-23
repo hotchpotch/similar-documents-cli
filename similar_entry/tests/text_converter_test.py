@@ -1,4 +1,3 @@
-from typing import Callable
 from ..text_converter import markdown, text, html
 
 from pathlib import Path
