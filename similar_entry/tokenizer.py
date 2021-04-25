@@ -17,4 +17,4 @@ def _createMecabTokenizer(target_features=["名詞", "形容詞", "感動詞"], 
     return tokenizer
 
 
-mecab = _createMecabTokenizer()
+japanese = _createMecabTokenizer()

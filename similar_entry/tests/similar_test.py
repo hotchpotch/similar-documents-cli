@@ -1,5 +1,5 @@
 from ..similar import tfidf_vectorize, top_k
-from ..tokenizer import mecab
+from ..tokenizer import japanese
 
 
 def test_similar():
@@ -11,8 +11,8 @@ def test_similar():
     assert results[0][0] == 1
 
 
-def test_similar_with_mecab():
+def test_similar_japanese():
     texts = ["こんにちは、かわいい犬ですね。", "犬とライオン", "猫とライオン"]
-    vectors = tfidf_vectorize(texts, mecab)
+    vectors = tfidf_vectorize(texts, tokenizer=japanese)
     results = list(top_k(vectors[0], vectors))
     assert results[0][0] == 1

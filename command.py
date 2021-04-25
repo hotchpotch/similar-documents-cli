@@ -45,7 +45,7 @@ if __name__ == "__main__":
     # print("text")
     texts = files_to_texts(files)
     # print("vectors")
-    vectors = tfidf_vectorize(texts, tokenizer=tokenizer.mecab)
+    vectors = tfidf_vectorize(texts, tokenizer=tokenizer.japanese)
     # print("top_k")
     top_ks = similar_vectors_top_k(vectors, k=3)
     assigned = assign_top_k(files, top_ks)

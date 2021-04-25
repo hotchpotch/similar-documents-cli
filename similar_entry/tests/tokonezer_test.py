@@ -1,10 +1,10 @@
-from ..tokenizer import mecab
+from ..tokenizer import japanese
 
 
-def test_mecab():
-    assert mecab("こんにちは、かわいい犬ですね。") == ["こんにちは", "かわいい", "犬"]
-    assert mecab("猫と犬") == ["猫", "犬"]
+def test_japanese():
+    assert japanese("こんにちは、かわいい犬ですね。") == ["こんにちは", "かわいい", "犬"]
+    assert japanese("猫と犬") == ["猫", "犬"]
 
 
-def test_mecab_numeric():
-    assert mecab("こんにちは、100か千ですね。") == ["こんにちは"]
+def test_japanese_numeric():
+    assert japanese("こんにちは、100か千ですね。") == ["こんにちは"]
