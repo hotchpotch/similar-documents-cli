@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 
-def _createMecabTokenizer(target_features=["名詞", "形容詞", "感動詞"], ignore_numeric=True):
+def _createJapaneseTokenizer(target_features=["名詞", "形容詞", "感動詞"], ignore_numeric=True):
     from fugashi import Tagger
 
     tagger = Tagger("-Owakati")
@@ -17,4 +17,4 @@ def _createMecabTokenizer(target_features=["名詞", "形容詞", "感動詞"], 
     return tokenizer
 
 
-japanese = _createMecabTokenizer()
+japanese = _createJapaneseTokenizer()
