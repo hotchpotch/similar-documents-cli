@@ -1,6 +1,6 @@
 {
   "python.testing.pytestArgs": [
-    "similar_entry"
+    "similar_documents"
   ],
   "python.testing.unittestEnabled": false,
   "python.testing.nosetestsEnabled": false,

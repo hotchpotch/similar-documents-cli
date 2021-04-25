@@ -1,5 +1,5 @@
 from pathlib import Path
-from similar_entry import (
+from similar_documents import (
     files_to_texts,
     similar_vectors_top_k,
     text_converter,
