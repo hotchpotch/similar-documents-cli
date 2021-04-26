@@ -3,25 +3,45 @@
 Generates similarity document scores from cli. Useful when combined with static site generators.
 
 ```
-$ similar-documents -t japanese -k 2 ~/Dropbox/secon-sites/data/markdowns/recently/*.md | jq . | head -20
+$ similar-documents -h
+usage: $ similar_documents -o result.json -k 5 -t japanese *.md
+       $ similar_documents -h
+
+positional arguments:
+  documents             list[str]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -o None, --output-file None
+                        Optional: write output file (default STDOUT)
+  -k 5, --top-k 5       Similar documents number
+  -d, --debug           Show debug messages
+  -t None, --tokenizer None
+                        tokenizer [japanese] (default None(space splitting))
+  -e utf-8, --encoding utf-8
+                        file encoding(default utf-8)
+```
+
+```
+$ similar-documents -t japanese -k 2 /data/markdowns/recently/*.md | jq . | head -20
 {
-  "/home/yu1/Dropbox/secon-sites/data/markdowns/recently/2021-04-01.md": [
+  "/data/markdowns/recently/2021-04-01.md": [
     [
-      "/home/yu1/Dropbox/secon-sites/data/markdowns/recently/2021-04-26.md",
+      "/data/markdowns/recently/2021-04-26.md",
       0.3123780045484529
     ],
     [
-      "/home/yu1/Dropbox/secon-sites/data/markdowns/recently/2021-04-03.md",
+      "/data/markdowns/recently/2021-04-03.md",
       0.17384380113610887
     ]
   ],
-  "/home/yu1/Dropbox/secon-sites/data/markdowns/recently/2021-04-02.md": [
+  "/data/markdowns/recently/2021-04-02.md": [
     [
-      "/home/yu1/Dropbox/secon-sites/data/markdowns/recently/2021-04-26.md",
+      "/data/markdowns/recently/2021-04-26.md",
       0.10715535963136594
     ],
     [
-      "/home/yu1/Dropbox/secon-sites/data/markdowns/recently/2021-04-23.md",
+      "/data/markdowns/recently/2021-04-23.md",
       0.09411751563901728
     ]
 ```
@@ -29,7 +49,7 @@ $ similar-documents -t japanese -k 2 ~/Dropbox/secon-sites/data/markdowns/recent
 ## Installation
 
 ```
-pip install similar-documents
+pip install -U similar-documents
 ```
 
 ### On Docker

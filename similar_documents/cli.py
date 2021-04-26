@@ -32,8 +32,8 @@ def cli(
     *documents: list[str],
 ):
     """
-    usage: $ similar_documents -o result.json -k 5 -t japanese *.md
-           $ similar_documents -h
+    usage: $ similar-documents -o result.json -k 5 -t japanese *.md
+           $ similar-documents -h
     """
     if len(documents) == 0:
         print(cli.__doc__, file=sys.stderr)
