@@ -32,7 +32,7 @@ def cli(
     *documents: list[str],
 ):
     """similar documents score
-    usage: $ similar_documents -o out.json -k 5 -t *.md
+    usage: $ similar_documents -o result.json -k 5 -t japanese *.md
            $ similar_documents -h
     """
     if len(documents) == 0:
@@ -44,13 +44,22 @@ def cli(
             tokenizer = _tokenizer.japanese
         else:
             raise f"tokenizer:{tokenizer} is unknown."
+    if debug:
+        print(f"files to texts {len(documents)}s documents", file=sys.stdout)
     texts = files_to_texts(documents, encoding=encoding)
+    if debug:
+        print(f"calc tfidf...", file=sys.stdout)
     vectors = tfidf_vectorize(texts, tokenizer=tokenizer)
+    if debug:
+        print(f"calc similarity...", file=sys.stdout)
     top_ks = similar_vectors_top_k(vectors, k=top_k)
+    if debug:
+        print(f"assign similarity score", file=sys.stdout)
     assigned = assign_top_k(documents, top_ks)
     json_body = json.dumps(assigned)
     if output_file:
-        print(output_file.__class__, output_file)
+        if debug:
+            print(f"write result to file {str(output_file)}", file=sys.stdout)
         output_file.open("w", encoding=encoding).write(json_body)
     else:
         print(json_body)
