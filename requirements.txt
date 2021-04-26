@@ -6,3 +6,4 @@ scipy
 beautifulsoup4
 scikit_learn
 unidic-lite
+plac
