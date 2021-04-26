@@ -15,7 +15,7 @@ from . import (
 
 
 @plac.opt("output_file", help="Optional: write output file (default STDOUT)", type=Path)
-@plac.opt("top_k", help="Similar documents number", abbrev="k", type=int)
+@plac.opt("top_k", help="Number of similar documents", abbrev="k", type=int)
 @plac.opt(
     "tokenizer",
     help="tokenizer [japanese] (default None(space splitting))",

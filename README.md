@@ -14,7 +14,7 @@ optional arguments:
   -h, --help            show this help message and exit
   -o None, --output-file None
                         Optional: write output file (default STDOUT)
-  -k 5, --top-k 5       Similar documents number
+  -k 5, --top-k 5       Number of similar documents
   -d, --debug           Show debug messages
   -t None, --tokenizer None
                         tokenizer [japanese] (default None(space splitting))
