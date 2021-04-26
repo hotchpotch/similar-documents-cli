@@ -4,7 +4,7 @@ from typing import Callable
 from markdown import Markdown
 from bs4 import BeautifulSoup
 
-Converter = Callable[[str], str]
+TextConverter = Callable[[str], str]
 
 
 def _createMarkdownToText():
@@ -17,7 +17,7 @@ def _createMarkdownToText():
         if type(meta) is dict:
             for key in meta.keys():
                 if key.upper() == "TITLE" and type(meta[key]) is str:
-                    text = meta[key] + "\n" + text
+                    text = f"{meta[key]}\n{text}"
                     break
 
         return text

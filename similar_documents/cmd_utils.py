@@ -23,7 +23,9 @@ def _detect_converter(ext: str):
 
 
 def file_to_text(
-    file: str, converter: Optional[text_converter.Converter] = None, encoding="utf-8"
+    file: str,
+    converter: Optional[text_converter.TextConverter] = None,
+    encoding="utf-8",
 ) -> str:
     path = Path(file)
     source = path.read_text(encoding=encoding)
@@ -34,13 +36,13 @@ def file_to_text(
     return converted
 
 
-def _file_to_text_tuple(t: tuple(str, Optional[text_converter.Converter], str)):
+def _file_to_text_tuple(t: tuple(str, Optional[text_converter.TextConverter], str)):
     return file_to_text(t[0], converter=t[1], encoding=t[2])
 
 
 def files_to_texts(
     files: list[str],
-    converter: Optional[text_converter.Converter] = None,
+    converter: Optional[text_converter.TextConverter] = None,
     encoding="utf-8",
 ) -> list[str]:
     pool = mp.Pool(mp.cpu_count())
