@@ -26,10 +26,18 @@ $ similar-documents -t japanese -k 2 ~/Dropbox/secon-sites/data/markdowns/recent
     ]
 ```
 
-## installation
+## Installation
 
 ```
-pip install -U similar-documents
+pip install similar-documents
+```
+
+### On Docker
+
+```
+$ docker build -t similar-doc .
+# examples: run on windows
+$ docker run -it -v C:\Users\yu1\Dropbox\secon-sites\data:/data/ --rm similar-doc bash -c 'similar-documents -t japanese -k 2 -o /data/result.json `ls /data/markdowns/*/*.md`'
 ```
 
 ## Lisence
