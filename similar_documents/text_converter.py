@@ -16,7 +16,7 @@ def _createMarkdownToText():
         text = html(str(body))
         if type(meta) is dict:
             for key in meta.keys():
-                if key.upper() == "TITLE":
+                if key.upper() == "TITLE" and type(meta[key]) is str:
                     text = meta[key] + "\n" + text
                     break
 

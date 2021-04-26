@@ -21,6 +21,11 @@ def test_markdown_with_yaml():
     assert markdown(fixture) == "Title\nHello markdown with yaml"
 
 
+def test_markdown_yaml_empty_title():
+    fixture = _read_fixture("markdown_yaml_empty_title.md")
+    assert markdown(fixture) == "empty title"
+
+
 def test_html():
     fixture = _read_fixture("1.html")
     assert html(fixture) == "Hello html"

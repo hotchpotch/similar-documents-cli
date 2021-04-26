@@ -14,5 +14,5 @@ def test_integration():
     vectors = tfidf_vectorize(texts, tokenizer=japanese)
     top_ks = similar_vectors_top_k(vectors, k=2)
     assigned = assign_top_k(files, top_ks)
-    assert len(list(assigned.keys())) == 4
+    assert len(list(assigned.keys())) == 5
     assert len(list(assigned.values())[0]) == 2  # size of k
