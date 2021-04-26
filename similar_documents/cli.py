@@ -31,7 +31,7 @@ def cli(
     encoding="utf-8",
     *documents: list[str],
 ):
-    """similar documents score
+    """
     usage: $ similar_documents -o result.json -k 5 -t japanese *.md
            $ similar_documents -h
     """
