@@ -2,8 +2,10 @@ from . import text_converter, tokenizer
 
 from .cmd_utils import files_to_texts, similar_vectors_top_k, assign_top_k
 from .similar import tfidf_vectorize
+from .cli import cli
 
 __all__ = [
+    "cli",
     "files_to_texts",
     "similar_vectors_top_k",
     "assign_top_k",
