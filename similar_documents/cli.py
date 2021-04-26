@@ -36,7 +36,7 @@ def cli(
            $ similar_documents -h
     """
     if len(documents) == 0:
-        print(cli.__doc__, file=sys.stdout)
+        print(cli.__doc__, file=sys.stderr)
         exit(1)
 
     if tokenizer:
@@ -45,21 +45,21 @@ def cli(
         else:
             raise f"tokenizer:{tokenizer} is unknown."
     if debug:
-        print(f"files to texts {len(documents)}s documents", file=sys.stdout)
+        print(f"files to texts {len(documents)} documents", file=sys.stderr)
     texts = files_to_texts(documents, encoding=encoding)
     if debug:
-        print(f"calc tfidf...", file=sys.stdout)
+        print(f"calc tfidf...", file=sys.stderr)
     vectors = tfidf_vectorize(texts, tokenizer=tokenizer)
     if debug:
-        print(f"calc similarity...", file=sys.stdout)
+        print(f"calc similarity...", file=sys.stderr)
     top_ks = similar_vectors_top_k(vectors, k=top_k)
     if debug:
-        print(f"assign similarity score", file=sys.stdout)
+        print(f"assign similarity score", file=sys.stderr)
     assigned = assign_top_k(documents, top_ks)
     json_body = json.dumps(assigned)
     if output_file:
         if debug:
-            print(f"write result to file {str(output_file)}", file=sys.stdout)
+            print(f"write result to file {str(output_file)}", file=sys.stderr)
         output_file.open("w", encoding=encoding).write(json_body)
     else:
         print(json_body)
