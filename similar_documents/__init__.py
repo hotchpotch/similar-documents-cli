@@ -4,7 +4,7 @@ from .cmd_utils import files_to_texts, similar_vectors_top_k, assign_top_k
 from .similar import tfidf_vectorize
 from .cli import cli
 
-version = "0.1.2"
+version = "0.1.3"
 
 __all__ = [
     "cli",
