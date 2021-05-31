@@ -1,3 +1,13 @@
 [build-system]
-requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
+requires = ["setuptools", "wheel"]
+
+# https://pytest.org/en/6.2.x/customize.html
+[tool.pytest.ini_options]
+addopts = "-rP"
+minversion = "6.2"
+testpaths = ["tests"]
+
+# https://github.com/microsoft/pyright/blob/main/docs/configuration.md
+[tool.pyright]
+pythonVersion = "3.7"

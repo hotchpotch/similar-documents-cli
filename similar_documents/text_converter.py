@@ -12,7 +12,7 @@ def _createMarkdownToText():
 
     def md2text(source: str) -> str:
         body = md.convert(source)
-        meta = md.Meta
+        meta = md.Meta  # type: ignore # XXX...
         text = html(str(body))
         if type(meta) is dict:
             for key in meta.keys():

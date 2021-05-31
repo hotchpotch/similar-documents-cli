@@ -1,12 +1,13 @@
 from __future__ import annotations
 
-from typing import Optional
+import itertools
+import multiprocessing as mp
 from pathlib import Path
+from typing import Optional
 
 from scipy.sparse.csr import csr_matrix
+
 from . import similar, text_converter
-import multiprocessing as mp
-import itertools
 
 _ext_converter_mappings = (
     (("md", "mdx", "markdown"), text_converter.markdown),
@@ -36,7 +37,7 @@ def file_to_text(
     return converted
 
 
-def _file_to_text_tuple(t: tuple(str, Optional[text_converter.TextConverter], str)):
+def _file_to_text_tuple(t: tuple(str, Optional[text_converter.TextConverter], str)):  # type: ignore
     return file_to_text(t[0], converter=t[1], encoding=t[2])
 
 
@@ -53,11 +54,11 @@ def files_to_texts(
     return texts
 
 
-def _top_k_tuple(t: tuple(csr_matrix, csr_matrix, int)):
+def _top_k_tuple(t: tuple(csr_matrix, csr_matrix, int)):  # type: ignore
     return similar.top_k(*t)
 
 
-def similar_vectors_top_k(vectors: list[csr_matrix], k=5):
+def similar_vectors_top_k(vectors: csr_matrix, k=5):
     pool = mp.Pool(mp.cpu_count())
     return pool.map(
         _top_k_tuple, zip(vectors, itertools.cycle([vectors]), itertools.cycle([k]))
@@ -65,7 +66,8 @@ def similar_vectors_top_k(vectors: list[csr_matrix], k=5):
 
 
 def assign_top_k(files: list[str], top_ks: list[list[tuple[int, float]]]):
-    file_dict: dict[str, tuple[str, float]] = {}
+    file_dict: dict[str, list[tuple[str, float]]] = {}
     for (file, top_k) in zip(files, top_ks):
-        file_dict[file] = [(files[index], score) for (index, score) in top_k]
+        scores = [(files[index], score) for (index, score) in top_k]
+        file_dict[file] = scores
     return file_dict

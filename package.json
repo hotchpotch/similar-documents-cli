@@ -1,0 +1,14 @@
+{
+  "name": "python-typechecker",
+  "version": "1.0.0",
+  "description": "run typechecker",
+  "main": "",
+  "scripts": {
+    "pyright": "pyright"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "pyright": "^1.1.145"
+  }
+}

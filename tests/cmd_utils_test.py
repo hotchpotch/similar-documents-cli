@@ -1,6 +1,10 @@
-from ..cmd_utils import files_to_texts, similar_vectors_top_k, assign_top_k
-from ..similar import tfidf_vectorize
-from ..tokenizer import japanese
+from similar_documents.cmd_utils import (
+    files_to_texts,
+    similar_vectors_top_k,
+    assign_top_k,
+)
+from similar_documents.similar import tfidf_vectorize
+from similar_documents.tokenizer import japanese
 
 from pathlib import Path
 import os

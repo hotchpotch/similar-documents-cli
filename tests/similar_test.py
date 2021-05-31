@@ -1,5 +1,5 @@
-from ..similar import tfidf_vectorize, top_k
-from ..tokenizer import japanese
+from similar_documents.similar import tfidf_vectorize, top_k
+from similar_documents.tokenizer import japanese
 
 
 def test_similar():

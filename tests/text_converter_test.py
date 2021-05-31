@@ -1,4 +1,4 @@
-from ..text_converter import markdown, text, html
+from similar_documents.text_converter import markdown, text, html
 
 from pathlib import Path
 import os

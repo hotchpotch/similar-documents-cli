@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import Callable, Optional
+from typing import Callable, Optional, cast
 
 import numpy as np
 from scipy.sparse.csr import csr_matrix
@@ -16,7 +16,7 @@ def tfidf_vectorize(
     if tokenizer:
         vectorizer_kargs["token_pattern"] = None
     vectorizer = TfidfVectorizer(**vectorizer_kargs)
-    return vectorizer.fit_transform(texts)
+    return cast(csr_matrix, vectorizer.fit_transform(texts))
 
 
 def top_k(target: csr_matrix, vectors: csr_matrix, k=5) -> list[tuple[int, float]]:
