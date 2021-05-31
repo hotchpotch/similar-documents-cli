@@ -1,17 +1,16 @@
 from __future__ import annotations
-import json
-from optparse import Option
-import sys
-import plac
-from pathlib import Path
 
-from . import (
-    tokenizer as _tokenizer,
-    files_to_texts,
-    tfidf_vectorize,
-    similar_vectors_top_k,
-    assign_top_k,
-)
+import json
+import sys
+from pathlib import Path
+from typing import Optional, cast, Any
+
+import plac as _plac
+
+from . import assign_top_k, files_to_texts, similar_vectors_top_k, tfidf_vectorize
+from . import tokenizer as _tokenizer
+
+plac = cast(Any, _plac)
 
 
 @plac.opt("output_file", help="Optional: write output file (default STDOUT)", type=Path)
@@ -24,26 +23,28 @@ from . import (
 @plac.opt("encoding", help="file encoding(default utf-8)")
 @plac.flg("debug", "Show debug messages")
 def cli(
-    output_file: Option[Path] = None,
+    output_file: Optional[Path] = None,
     top_k=5,
     debug=False,
     tokenizer=None,
     encoding="utf-8",
-    *documents: list[str],
+    *_documents: str,
 ):
     """
     usage: $ similar-documents -o result.json -k 5 -t japanese *.md
            $ similar-documents -h
     """
-    if len(documents) == 0:
+    if len(_documents) == 0:
         print(cli.__doc__, file=sys.stderr)
         exit(1)
+
+    documents = list(_documents)
 
     if tokenizer:
         if tokenizer and tokenizer == "japanese":
             tokenizer = _tokenizer.japanese
         else:
-            raise f"tokenizer:{tokenizer} is unknown."
+            raise Exception(f"tokenizer:{tokenizer} is unknown.")
     if debug:
         print(f"files to texts {len(documents)} documents", file=sys.stderr)
     texts = files_to_texts(documents, encoding=encoding)

@@ -1,9 +1,11 @@
 from __future__ import annotations
+from typing import Any, cast
 
 
 def _createJapaneseTokenizer(target_features=["名詞", "形容詞", "感動詞"], ignore_numeric=True):
-    from fugashi import Tagger
+    import fugashi
 
+    Tagger = cast(Any, fugashi).Tagger
     tagger = Tagger("-Owakati")
 
     def tokenizer(text: str) -> list[str]:
