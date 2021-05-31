@@ -1,4 +1,4 @@
-from ..tokenizer import japanese
+from similar_documents.tokenizer import japanese
 
 
 def test_japanese():
